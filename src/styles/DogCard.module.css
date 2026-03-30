@@ -68,3 +68,8 @@
 }
 
 .delete:hover { background: var(--color-danger-hover); }
+
+@media (max-width: 600px) {
+  .actions { flex-direction: column; }
+  .edit, .delete { padding: 12px; font-size: 1rem; }
+}

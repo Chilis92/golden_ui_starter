@@ -7,6 +7,8 @@
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow);
+  position: relative;
+  z-index: 100;
 }
 
 .brand {
@@ -35,4 +37,56 @@
 .active {
   color: var(--color-primary) !important;
   border-bottom-color: var(--color-primary) !important;
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+
+.bar, .barTop, .barBottom, .barHide {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.barTop  { transform: translateY(7px) rotate(45deg); }
+.barHide { opacity: 0; }
+.barBottom { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 600px) {
+  .hamburger { display: flex; }
+
+  .links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+  }
+
+  .linksOpen { display: flex; }
+
+  .links a {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1rem;
+  }
 }
