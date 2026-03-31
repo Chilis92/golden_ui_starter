@@ -4,8 +4,24 @@ import DogCard from '../components/DogCard'
 import styles from '../styles/DogListPage.module.css'
 
 export default function DogListPage() {
-  const { dogs, deleteDog } = useDogs()
+  const { dogs, loading, error, deleteDog } = useDogs()
   const navigate = useNavigate()
+
+  if (loading) {
+    return (
+      <main className={styles.page}>
+        <p>Loading dogs...</p>
+      </main>
+    )
+  }
+
+  if (error) {
+    return (
+      <main className={styles.page}>
+        <p className={styles.error}>Failed to load dogs: {error}</p>
+      </main>
+    )
+  }
 
   return (
     <main className={styles.page}>
@@ -22,7 +38,7 @@ export default function DogListPage() {
       ) : (
         <div className={styles.grid}>
           {dogs.map(dog => (
-            <DogCard key={dog.id} dog={dog} onDelete={deleteDog} />
+            <DogCard key={dog.dogId} dog={dog} onDelete={deleteDog} />
           ))}
         </div>
       )}

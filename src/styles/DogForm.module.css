@@ -64,6 +64,37 @@
 
 .submit:hover { background: var(--color-primary-hover); }
 
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: auto;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.ownerSection {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ownerLegend {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  padding: 0 0.25rem;
+}
+
 @media (max-width: 640px) {
   .form { max-width: 100%; }
 

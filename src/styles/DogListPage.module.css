@@ -43,6 +43,12 @@
 
 .empty button:hover { background: var(--color-primary-hover); }
 
+.error {
+  color: var(--color-danger);
+  padding: 1rem 0;
+  font-size: 1rem;
+}
+
 @media (max-width: 600px) {
   .page { margin: 1.5rem 1rem; }
 
