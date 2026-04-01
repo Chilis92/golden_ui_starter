@@ -37,7 +37,7 @@ export function DogProvider({ children }) {
     }
   }, [])
 
-  // dogData shape: { name, breed, color, age, gender, photo: File|null,
+  // dogData shape: { name, breed, age, gender, photo: File|null,
   //                  owner: { name, age, gender, email, city, phone } | null }
   async function addDog(dogData) {
     const { photo, owner, ...rest } = dogData

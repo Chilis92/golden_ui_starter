@@ -5,7 +5,6 @@ const DOG_FIELDS = `
   dogId
   name
   breed
-  color
   age
   gender
   imageURL

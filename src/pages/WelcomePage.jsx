@@ -20,8 +20,8 @@ export default function WelcomePage() {
     <main className={styles.page}>
       <div className={styles.hero}>
         <div className={styles.icon}>🐾</div>
-        <h1>Welcome to Dog Registry</h1>
-        <p>Keep track of all your furry friends in one place.</p>
+        <h1>Bienvenido al Registro de Perros</h1>
+        <p>Lleva el control de todos tus amigos peludos en un solo lugar.</p>
 
         <div className={styles.photos}>
           {photos.map((photo, i) => (
@@ -33,8 +33,8 @@ export default function WelcomePage() {
         </div>
 
         <div className={styles.buttons}>
-          <button className={styles.primary} onClick={() => navigate('/register')}>Register a Dog</button>
-          <button className={styles.secondary} onClick={() => navigate('/dogs')}>View All Dogs</button>
+          <button className={styles.primary} onClick={() => navigate('/register')}>Registrar un perro</button>
+          <button className={styles.secondary} onClick={() => navigate('/dogs')}>Ver todos los perros</button>
         </div>
       </div>
     </main>

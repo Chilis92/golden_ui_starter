@@ -21,7 +21,6 @@ export default function EditDogPage() {
   const initialValues = {
     name: dog.name || '',
     breed: dog.breed || '',
-    color: dog.color || '',
     age: dog.age ?? '',
     gender: dog.gender || 'Male',
     imageURL: dog.imageURL || null,   // used only for the preview
@@ -44,8 +43,8 @@ export default function EditDogPage() {
 
   return (
     <main className={styles.page}>
-      <h2>Edit {dog.name}</h2>
-      <DogForm initialValues={initialValues} onSubmit={handleSubmit} submitLabel="Save Changes" />
+      <h2>Editar a {dog.name}</h2>
+      <DogForm initialValues={initialValues} onSubmit={handleSubmit} submitLabel="Guardar cambios" />
     </main>
   )
 }

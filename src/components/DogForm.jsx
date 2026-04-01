@@ -4,7 +4,6 @@ import styles from '../styles/DogForm.module.css'
 const emptyDog = {
   name: '',
   breed: 'Golden Retriever',
-  color: '',
   age: '',
   gender: 'Male'
 }
@@ -40,22 +39,21 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
   // ---------------------------------------------------------------------------
   function validate() {
     const e = {}
-    if (!values.name.trim()) e.name = 'Dog name is required'
-    if (!values.breed.trim()) e.breed = 'Breed is required'
-    if (!values.color.trim()) e.color = 'Color is required'
-    if (values.age === '' || isNaN(values.age) || parseInt(values.age) < 0) e.age = 'Valid age is required'
+    if (!values.name.trim()) e.name = 'El nombre del perro es requerido'
+    if (!values.breed.trim()) e.breed = 'La raza es requerida'
+    if (values.age === '' || isNaN(values.age) || parseInt(values.age) < 0) e.age = 'Se requiere una edad válida'
     return e
   }
 
   function validateOwner() {
     if (!showOwner) return {}
     const e = {}
-    if (!ownerValues.name.trim()) e.name = 'Owner name is required'
+    if (!ownerValues.name.trim()) e.name = 'El nombre del dueño es requerido'
     if (ownerValues.age !== '' && (isNaN(ownerValues.age) || parseInt(ownerValues.age) < 0)) {
-      e.age = 'Valid age required'
+      e.age = 'Se requiere una edad válida'
     }
     if (ownerValues.email && !/\S+@\S+\.\S+/.test(ownerValues.email)) {
-      e.email = 'Valid email required'
+      e.email = 'Se requiere un correo electrónico válido'
     }
     return e
   }
@@ -115,7 +113,6 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
     onSubmit({
       name: values.name.trim(),
       breed: values.breed.trim(),
-      color: values.color.trim(),
       age: parseInt(values.age),
       gender: values.gender,
       photo: photoFile,
@@ -129,57 +126,50 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
 
-      {/* Dog Name */}
+      {/* Nombre del perro */}
       <div className={styles.field}>
-        <label htmlFor="name">Dog Name</label>
-        <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="e.g. Buddy" />
+        <label htmlFor="name">Nombre del perro</label>
+        <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="ej. Buddy" />
         {errors.name && <span className={styles.error}>{errors.name}</span>}
       </div>
 
-      {/* Breed */}
+      {/* Raza */}
       <div className={styles.field}>
-        <label htmlFor="breed">Breed</label>
-        <input id="breed" name="breed" value={values.breed} onChange={handleChange} placeholder="e.g. Golden Retriever" />
+        <label htmlFor="breed">Raza</label>
+        <input id="breed" name="breed" value={values.breed} onChange={handleChange} placeholder="ej. Golden Retriever" />
         {errors.breed && <span className={styles.error}>{errors.breed}</span>}
       </div>
 
-      {/* Color */}
+      {/* Edad */}
       <div className={styles.field}>
-        <label htmlFor="color">Color</label>
-        <input id="color" name="color" value={values.color} onChange={handleChange} placeholder="e.g. Golden" />
-        {errors.color && <span className={styles.error}>{errors.color}</span>}
-      </div>
-
-      {/* Age */}
-      <div className={styles.field}>
-        <label htmlFor="age">Age (years)</label>
-        <input id="age" name="age" type="number" min="0" step="1" value={values.age} onChange={handleChange} placeholder="e.g. 3" />
+        <label htmlFor="age">Edad (años)</label>
+        <input id="age" name="age" type="number" min="0" step="1" value={values.age} onChange={handleChange} placeholder="ej. 3" />
         {errors.age && <span className={styles.error}>{errors.age}</span>}
       </div>
 
-      {/* Gender */}
+      {/* Género */}
       <div className={styles.field}>
-        <label htmlFor="gender">Gender</label>
+        <label htmlFor="gender">Género</label>
         <select id="gender" name="gender" value={values.gender} onChange={handleChange}>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+          <option value="Male">Macho</option>
+          <option value="Female">Hembra</option>
         </select>
       </div>
 
-      {/* Photo */}
+      {/* Foto */}
       <div className={styles.field}>
-        <label>Photo (optional)</label>
+        <label>Foto (opcional)</label>
         {preview ? (
           <div className={styles.previewWrapper}>
-            <img src={preview} alt="Dog preview" className={styles.preview} />
-            <button type="button" className={styles.removePhoto} onClick={removePhoto}>Remove</button>
+            <img src={preview} alt="Vista previa del perro" className={styles.preview} />
+            <button type="button" className={styles.removePhoto} onClick={removePhoto}>Eliminar</button>
           </div>
         ) : (
           <input ref={fileRef} type="file" accept="image/*" onChange={handlePhoto} className={styles.fileInput} />
         )}
       </div>
 
-      {/* Owner toggle */}
+      {/* Activar sección de dueño */}
       <div className={styles.field}>
         <label className={styles.checkboxLabel}>
           <input
@@ -188,43 +178,43 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
             onChange={handleOwnerToggle}
             className={styles.checkbox}
           />
-          Add owner details
+          Agregar datos del dueño
         </label>
       </div>
 
-      {/* Owner section */}
+      {/* Sección del dueño */}
       {showOwner && (
         <fieldset className={styles.ownerSection}>
-          <legend className={styles.ownerLegend}>Owner Information</legend>
+          <legend className={styles.ownerLegend}>Información del dueño</legend>
 
           <div className={styles.field}>
-            <label htmlFor="ownerName">Owner Name</label>
-            <input id="ownerName" name="name" value={ownerValues.name} onChange={handleOwnerChange} placeholder="e.g. Jane Smith" />
+            <label htmlFor="ownerName">Nombre del dueño</label>
+            <input id="ownerName" name="name" value={ownerValues.name} onChange={handleOwnerChange} placeholder="ej. Juan García" />
             {ownerErrors.name && <span className={styles.error}>{ownerErrors.name}</span>}
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ownerAge">Owner Age</label>
-            <input id="ownerAge" name="age" type="number" min="0" step="1" value={ownerValues.age} onChange={handleOwnerChange} placeholder="e.g. 30" />
+            <label htmlFor="ownerAge">Edad del dueño</label>
+            <input id="ownerAge" name="age" type="number" min="0" step="1" value={ownerValues.age} onChange={handleOwnerChange} placeholder="ej. 30" />
             {ownerErrors.age && <span className={styles.error}>{ownerErrors.age}</span>}
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ownerGender">Owner Gender</label>
+            <label htmlFor="ownerGender">Género del dueño</label>
             <select id="ownerGender" name="gender" value={ownerValues.gender} onChange={handleOwnerChange}>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="Male">Masculino</option>
+              <option value="Female">Femenino</option>
             </select>
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ownerEmail">Owner Email</label>
-            <input id="ownerEmail" name="email" type="email" value={ownerValues.email} onChange={handleOwnerChange} placeholder="e.g. jane@example.com" />
+            <label htmlFor="ownerEmail">Correo electrónico</label>
+            <input id="ownerEmail" name="email" type="email" value={ownerValues.email} onChange={handleOwnerChange} placeholder="ej. juan@ejemplo.com" />
             {ownerErrors.email && <span className={styles.error}>{ownerErrors.email}</span>}
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ownerCity">Owner City</label>
+            <label htmlFor="ownerCity">Ciudad del dueño</label>
             <select id="ownerCity" name="city" value={ownerValues.city} onChange={handleOwnerChange}>
               <option value="Guadalajara">Guadalajara</option>
               <option value="Zapopan">Zapopan</option>
@@ -232,8 +222,8 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="ownerPhone">Owner Phone</label>
-            <input id="ownerPhone" name="phone" value={ownerValues.phone} onChange={handleOwnerChange} placeholder="e.g. 333-123-4567" />
+            <label htmlFor="ownerPhone">Teléfono del dueño</label>
+            <input id="ownerPhone" name="phone" value={ownerValues.phone} onChange={handleOwnerChange} placeholder="ej. 333-123-4567" />
           </div>
         </fieldset>
       )}

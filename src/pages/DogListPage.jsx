@@ -10,7 +10,7 @@ export default function DogListPage() {
   if (loading) {
     return (
       <main className={styles.page}>
-        <p>Loading dogs...</p>
+        <p>Cargando perros...</p>
       </main>
     )
   }
@@ -18,7 +18,7 @@ export default function DogListPage() {
   if (error) {
     return (
       <main className={styles.page}>
-        <p className={styles.error}>Failed to load dogs: {error}</p>
+        <p className={styles.error}>Error al cargar los perros: {error}</p>
       </main>
     )
   }
@@ -26,14 +26,14 @@ export default function DogListPage() {
   return (
     <main className={styles.page}>
       <div className={styles.header}>
-        <h2>Registered Dogs ({dogs.length})</h2>
-        <button className={styles.addBtn} onClick={() => navigate('/register')}>+ Register New Dog</button>
+        <h2>Perros registrados ({dogs.length})</h2>
+        <button className={styles.addBtn} onClick={() => navigate('/register')}>+ Registrar nuevo perro</button>
       </div>
 
       {dogs.length === 0 ? (
         <div className={styles.empty}>
-          <p>No dogs registered yet.</p>
-          <button onClick={() => navigate('/register')}>Register your first dog</button>
+          <p>Aún no hay perros registrados.</p>
+          <button onClick={() => navigate('/register')}>Registra tu primer perro</button>
         </div>
       ) : (
         <div className={styles.grid}>

@@ -14,8 +14,8 @@ export default function RegisterPage() {
 
   return (
     <main className={styles.page}>
-      <h2>Register a Dog</h2>
-      <DogForm onSubmit={handleSubmit} submitLabel="Register Dog" />
+      <h2>Registrar un perro</h2>
+      <DogForm onSubmit={handleSubmit} submitLabel="Registrar perro" />
     </main>
   )
 }
