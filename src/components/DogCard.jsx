@@ -15,8 +15,7 @@ export default function DogCard({ dog, onDelete }) {
         : <div className={styles.photoPlaceholder}>Sin foto</div>
       }
       <h3 className={styles.name}>{dog.name}</h3>
-      <p><span className={styles.label}>Raza:</span> {dog.breed}</p>
-      <p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
+<p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
       <p><span className={styles.label}>Género:</span> {dog.gender}</p>
       {dog.owner && (
         <>

@@ -4,7 +4,6 @@ const GRAPHQL_URL = 'http://localhost:8080/graphql'
 const DOG_FIELDS = `
   dogId
   name
-  breed
   age
   gender
   imageURL

@@ -3,7 +3,6 @@ import styles from '../styles/DogForm.module.css'
 
 const emptyDog = {
   name: '',
-  breed: 'Golden Retriever',
   age: '',
   gender: 'Male'
 }
@@ -40,7 +39,6 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
   function validate() {
     const e = {}
     if (!values.name.trim()) e.name = 'El nombre del perro es requerido'
-    if (!values.breed.trim()) e.breed = 'La raza es requerida'
     if (values.age === '' || isNaN(values.age) || parseInt(values.age) < 0) e.age = 'Se requiere una edad válida'
     return e
   }
@@ -112,7 +110,6 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
 
     onSubmit({
       name: values.name.trim(),
-      breed: values.breed.trim(),
       age: parseInt(values.age),
       gender: values.gender,
       photo: photoFile,
@@ -131,13 +128,6 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
         <label htmlFor="name">Nombre del perro</label>
         <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="ej. Buddy" />
         {errors.name && <span className={styles.error}>{errors.name}</span>}
-      </div>
-
-      {/* Raza */}
-      <div className={styles.field}>
-        <label htmlFor="breed">Raza</label>
-        <input id="breed" name="breed" value={values.breed} onChange={handleChange} placeholder="ej. Golden Retriever" />
-        {errors.breed && <span className={styles.error}>{errors.breed}</span>}
       </div>
 
       {/* Edad */}

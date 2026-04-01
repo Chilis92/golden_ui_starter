@@ -20,7 +20,6 @@ export default function EditDogPage() {
   // photo starts as null — user must upload a new file to replace the image.
   const initialValues = {
     name: dog.name || '',
-    breed: dog.breed || '',
     age: dog.age ?? '',
     gender: dog.gender || 'Male',
     imageURL: dog.imageURL || null,   // used only for the preview
