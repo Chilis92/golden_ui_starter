@@ -27,7 +27,7 @@ export default function DogListPage() {
     <main className={styles.page}>
       <div className={styles.header}>
         <h2>Perros registrados ({dogs.length})</h2>
-        <button className={styles.addBtn} onClick={() => navigate('/register')}>+ Registrar nuevo perro</button>
+        <button className={styles.addBtn} onClick={() => navigate('/register')}>+ Registrar nuevo Golden</button>
       </div>
 
       {dogs.length === 0 ? (
