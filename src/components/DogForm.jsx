@@ -36,6 +36,7 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
     const e = {}
     if (!values.name.trim()) e.name = 'El nombre del golden es requerido'
     if (values.age === '' || isNaN(values.age) || parseInt(values.age) < 0) e.age = 'Se requiere una edad válida'
+    if (!photoFile && !preview) e.photo = 'La foto es requerida'
     return e
   }
 
@@ -149,7 +150,7 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
 
       {/* Foto */}
       <div className={styles.field}>
-        <label>Foto (opcional)</label>
+        <label>Foto</label>
         {preview ? (
           <div className={styles.previewWrapper}>
             <img src={preview} alt="Vista previa del golden" className={styles.preview} />
@@ -158,6 +159,7 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
         ) : (
           <input ref={fileRef} type="file" accept="image/*" onChange={handlePhoto} className={styles.fileInput} />
         )}
+        {errors.photo && <span className={styles.error}>{errors.photo}</span>}
       </div>
 
       {/* Sección del dueño */}
