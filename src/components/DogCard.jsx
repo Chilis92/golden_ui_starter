@@ -18,6 +18,7 @@ export default function DogCard({ dog, onDelete }) {
       }
       {lightbox && (
         <div className={styles.overlay} onClick={() => setLightbox(false)}>
+          <button className={styles.closeBtn} onClick={() => setLightbox(false)}>✕</button>
           <img src={dog.imageURL} alt={dog.name} className={styles.lightboxImg} />
         </div>
       )}

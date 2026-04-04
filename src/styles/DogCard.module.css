@@ -26,6 +26,24 @@
   cursor: zoom-out;
 }
 
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
 .lightboxImg {
   max-width: 90vw;
   max-height: 90vh;
