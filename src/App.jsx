@@ -5,6 +5,7 @@ import WelcomePage from './pages/WelcomePage'
 import RegisterPage from './pages/RegisterPage'
 import DogListPage from './pages/DogListPage'
 import EditDogPage from './pages/EditDogPage'
+import ActivitiesPage from './pages/ActivitiesPage'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dogs" element={<DogListPage />} />
           <Route path="/dogs/:id/edit" element={<EditDogPage />} />
+          <Route path="/activities" element={<ActivitiesPage />} />
         </Routes>
       </BrowserRouter>
     </DogProvider>

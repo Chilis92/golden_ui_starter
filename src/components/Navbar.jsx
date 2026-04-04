@@ -18,6 +18,7 @@ export default function Navbar() {
       <div className={`${styles.links} ${open ? styles.linksOpen : ''}`}>
         <NavLink to="/dogs" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setOpen(false)}>Todos los Golden</NavLink>
         <NavLink to="/register" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setOpen(false)}>Registrar</NavLink>
+        <NavLink to="/activities" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setOpen(false)}>Actividades</NavLink>
       </div>
     </nav>
   )
