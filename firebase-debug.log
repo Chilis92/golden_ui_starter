@@ -1,0 +1,44 @@
+[debug] [2026-04-03T19:42:30.447Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T19:42:30.448Z] Command:       /opt/homebrew/Cellar/node/25.9.0_1/bin/node /opt/homebrew/bin/firebase projects:addfirebase golden-project-492118
+[debug] [2026-04-03T19:42:30.448Z] CLI Version:   15.13.0
+[debug] [2026-04-03T19:42:30.448Z] Platform:      darwin
+[debug] [2026-04-03T19:42:30.448Z] Node Version:  v25.9.0
+[debug] [2026-04-03T19:42:30.448Z] Time:          Fri Apr 03 2026 13:42:30 GMT-0600 (Central Standard Time)
+[debug] [2026-04-03T19:42:30.448Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T19:42:30.451Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T19:42:30.451Z] > authorizing via signed-in user (roji.pro@gmail.com)
+[debug] [2026-04-03T19:42:30.452Z] Checked if tokens are valid: true, expires at: 1775248909832
+[debug] [2026-04-03T19:42:30.452Z] Checked if tokens are valid: true, expires at: 1775248909832
+[debug] [2026-04-03T19:42:30.452Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase [none]
+[debug] [2026-04-03T19:42:30.819Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase 403
+[debug] [2026-04-03T19:42:30.819Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-04-03T19:42:30.819Z] Request to https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase had HTTP Error: 403, The caller does not have permission
+[debug] [2026-04-03T19:42:30.820Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase had HTTP Error: 403, The caller does not have permission
+    at responseToError (/opt/homebrew/Cellar/firebase-cli/15.13.0/libexec/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/opt/homebrew/Cellar/firebase-cli/15.13.0/libexec/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to add Firebase to Google Cloud Platform project. See firebase-debug.log for more info.
+[debug] [2026-04-03T19:43:04.464Z] ----------------------------------------------------------------------
+[debug] [2026-04-03T19:43:04.465Z] Command:       /opt/homebrew/Cellar/node/25.9.0_1/bin/node /opt/homebrew/bin/firebase projects:addfirebase golden-project-492118
+[debug] [2026-04-03T19:43:04.465Z] CLI Version:   15.13.0
+[debug] [2026-04-03T19:43:04.465Z] Platform:      darwin
+[debug] [2026-04-03T19:43:04.465Z] Node Version:  v25.9.0
+[debug] [2026-04-03T19:43:04.465Z] Time:          Fri Apr 03 2026 13:43:04 GMT-0600 (Central Standard Time)
+[debug] [2026-04-03T19:43:04.465Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-04-03T19:43:04.468Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-03T19:43:04.468Z] > authorizing via signed-in user (roji.pro@gmail.com)
+[debug] [2026-04-03T19:43:04.469Z] Checked if tokens are valid: true, expires at: 1775248909832
+[debug] [2026-04-03T19:43:04.469Z] Checked if tokens are valid: true, expires at: 1775248909832
+[debug] [2026-04-03T19:43:04.469Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase [none]
+[debug] [2026-04-03T19:43:04.730Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase 403
+[debug] [2026-04-03T19:43:04.731Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-04-03T19:43:04.731Z] Request to https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase had HTTP Error: 403, The caller does not have permission
+[debug] [2026-04-03T19:43:04.731Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/golden-project-492118:addFirebase had HTTP Error: 403, The caller does not have permission
+    at responseToError (/opt/homebrew/Cellar/firebase-cli/15.13.0/libexec/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/opt/homebrew/Cellar/firebase-cli/15.13.0/libexec/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+[error] 
+[error] Error: Failed to add Firebase to Google Cloud Platform project. See firebase-debug.log for more info.

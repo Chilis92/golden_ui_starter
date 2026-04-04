@@ -61,6 +61,8 @@ export async function fetchDogById(id) {
 // Mutations
 // ---------------------------------------------------------------------------
 
+const CREATE_DOG_FIELDS = `dogId name age gender imageURL instagram city token owner { personId name email }`
+
 export async function createDog(dogFields, personInput, photoFile) {
   if (photoFile) {
     // Multipart upload following the GraphQL multipart request spec
@@ -68,7 +70,7 @@ export async function createDog(dogFields, personInput, photoFile) {
       query: `
         mutation CreateDog($dogInput: [DogInput], $personInput: PersonInput) {
           createDog(dogInput: $dogInput, personInput: $personInput) {
-            ${DOG_FIELDS}
+            ${CREATE_DOG_FIELDS}
           }
         }
       `,
@@ -94,7 +96,7 @@ export async function createDog(dogFields, personInput, photoFile) {
   const data = await gqlRequest(`
     mutation CreateDog($dogInput: [DogInput], $personInput: PersonInput) {
       createDog(dogInput: $dogInput, personInput: $personInput) {
-        ${DOG_FIELDS}
+        ${CREATE_DOG_FIELDS}
       }
     }
   `, {
@@ -104,18 +106,19 @@ export async function createDog(dogFields, personInput, photoFile) {
   return data.createDog
 }
 
-export async function updateDog(id, dogFields, photoFile) {
+export async function updateDog(id, dogFields, token, photoFile) {
   if (photoFile) {
     const operations = JSON.stringify({
       query: `
-        mutation UpdateDog($id: ID, $dogInput: DogInput) {
-          updateDog(id: $id, dogInput: $dogInput) {
+        mutation UpdateDog($id: ID, $dogInput: DogInput, $token: String) {
+          updateDog(id: $id, dogInput: $dogInput, token: $token) {
             ${DOG_FIELDS}
           }
         }
       `,
       variables: {
         id,
+        token,
         dogInput: { ...dogFields, file: null }
       }
     })
@@ -133,20 +136,20 @@ export async function updateDog(id, dogFields, photoFile) {
   }
 
   const data = await gqlRequest(`
-    mutation UpdateDog($id: ID, $dogInput: DogInput) {
-      updateDog(id: $id, dogInput: $dogInput) {
+    mutation UpdateDog($id: ID, $dogInput: DogInput, $token: String) {
+      updateDog(id: $id, dogInput: $dogInput, token: $token) {
         ${DOG_FIELDS}
       }
     }
-  `, { id, dogInput: dogFields })
+  `, { id, token, dogInput: dogFields })
   return data.updateDog
 }
 
-export async function deleteDog(id) {
+export async function deleteDog(id, token) {
   const data = await gqlRequest(`
-    mutation DeleteDog($id: ID) {
-      deleteDog(id: $id)
+    mutation DeleteDog($id: ID, $token: String) {
+      deleteDog(id: $id, token: $token)
     }
-  `, { id })
+  `, { id, token })
   return data.deleteDog
 }

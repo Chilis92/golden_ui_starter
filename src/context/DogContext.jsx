@@ -37,33 +37,48 @@ export function DogProvider({ children }) {
     }
   }, [])
 
-  // dogData shape: { name, breed, age, gender, photo: File|null,
-  //                  owner: { name, age, gender, email, city, phone } | null }
+  function getTokens() {
+    return JSON.parse(localStorage.getItem('golden_tokens') || '{}')
+  }
+
+  function saveToken(dogId, token) {
+    const tokens = getTokens()
+    tokens[dogId] = token
+    localStorage.setItem('golden_tokens', JSON.stringify(tokens))
+  }
+
+  function getToken(dogId) {
+    return getTokens()[dogId] || null
+  }
+
   async function addDog(dogData) {
     const { photo, owner, ...rest } = dogData
-    // Strip null/undefined owner fields to keep the payload clean
     const personInput = owner ? Object.fromEntries(
       Object.entries(owner).filter(([, v]) => v !== '' && v !== null && v !== undefined)
     ) : null
 
-    await apiCreateDog(rest, personInput, photo || null)
+    const created = await apiCreateDog(rest, personInput, photo || null)
+    if (created) {
+      created.forEach(dog => saveToken(dog.dogId, dog.token))
+    }
     await refresh()
   }
 
   async function updateDog(id, dogData) {
     const { photo, owner, ...rest } = dogData
-    // photo is null when the user didn't upload a new image — omit the file arg
-    await apiUpdateDog(id, rest, photo || null)
+    const token = getToken(id)
+    await apiUpdateDog(id, rest, token, photo || null)
     await refresh()
   }
 
   async function deleteDog(id) {
-    await apiDeleteDog(id)
+    const token = getToken(id)
+    await apiDeleteDog(id, token)
     await refresh()
   }
 
   return (
-    <DogContext.Provider value={{ dogs, loading, error, addDog, updateDog, deleteDog }}>
+    <DogContext.Provider value={{ dogs, loading, error, addDog, updateDog, deleteDog, getToken }}>
       {children}
     </DogContext.Provider>
   )

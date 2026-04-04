@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Retrievers App — GCP Architecture</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #202124;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: #5f6368;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .diagram-container {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      max-width: 1100px;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .legend {
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: #f8f9fa;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .legend-title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #202124;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .legend-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      color: #3c4043;
+    }
+
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Golden Retrievers App — GCP Architecture</h1>
+  <p class="subtitle">Project: golden-project-492118 &nbsp;|&nbsp; Region: us-east1</p>
+
+  <div class="diagram-container">
+    <svg
+      viewBox="0 0 1040 580"
+      width="100%"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="GCP Architecture Diagram for Golden Retrievers App"
+      role="img"
+    >
+      <defs>
+        <!-- Arrow markers -->
+        <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#4285F4" />
+        </marker>
+        <marker id="arrow-dark-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#1A73E8" />
+        </marker>
+        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#34A853" />
+        </marker>
+        <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#9C27B0" />
+        </marker>
+        <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#5f6368" />
+        </marker>
+
+        <!-- Drop shadow filter -->
+        <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018" />
+        </filter>
+
+        <!-- Subtle inner glow for GCP boundary -->
+        <filter id="boundary-glow">
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+
+      <!-- ===================== GCP PROJECT BOUNDARY ===================== -->
+      <rect
+        x="220" y="40" width="790" height="520"
+        rx="16" ry="16"
+        fill="#E8F0FE"
+        stroke="#4285F4"
+        stroke-width="2"
+        stroke-dasharray="10,5"
+        opacity="0.6"
+      />
+      <!-- GCP project label badge -->
+      <rect x="220" y="28" width="290" height="26" rx="6" fill="#4285F4" />
+      <text x="365" y="45" font-family="'Google Sans', Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">
+        GCP Project: golden-project-492118
+      </text>
+      <!-- Region label -->
+      <text x="990" y="68" font-family="'Google Sans', Arial, sans-serif" font-size="11" fill="#1967D2" text-anchor="end" font-style="italic">
+        Region: us-east1
+      </text>
+
+      <!-- ===================== USER (BROWSER) ===================== -->
+      <!-- Node positioned outside GCP boundary on the left -->
+      <g id="user-node" transform="translate(42, 220)">
+        <!-- Card -->
+        <rect x="0" y="0" width="140" height="100" rx="10" fill="#ffffff" stroke="#dadce0" stroke-width="1.5" filter="url(#card-shadow)" />
+        <!-- Icon area -->
+        <rect x="0" y="0" width="140" height="36" rx="10" fill="#F1F3F4" />
+        <rect x="0" y="26" width="140" height="10" fill="#F1F3F4" />
+        <!-- Browser icon (simplified) -->
+        <rect x="52" y="7" width="36" height="24" rx="4" fill="#5f6368" />
+        <rect x="52" y="7" width="36" height="8" rx="4" fill="#3c4043" />
+        <circle cx="57" cy="11" r="2" fill="#EA4335" />
+        <circle cx="64" cy="11" r="2" fill="#FBBC04" />
+        <circle cx="71" cy="11" r="2" fill="#34A853" />
+        <!-- Label -->
+        <text x="70" y="56" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="600" fill="#202124" text-anchor="middle">User</text>
+        <text x="70" y="72" font-family="'Google Sans', Arial, sans-serif" font-size="11" fill="#5f6368" text-anchor="middle">(Browser)</text>
+      </g>
+
+      <!-- ===================== CLOUD RUN: golden-ui ===================== -->
+      <g id="golden-ui-node" transform="translate(300, 170)">
+        <rect x="0" y="0" width="200" height="120" rx="10" fill="#ffffff" stroke="#4285F4" stroke-width="2" filter="url(#card-shadow)" />
+        <!-- Header bar -->
+        <rect x="0" y="0" width="200" height="38" rx="10" fill="#4285F4" />
+        <rect x="0" y="28" width="200" height="10" fill="#4285F4" />
+        <!-- Cloud Run icon (simplified hexagon) -->
+        <polygon points="18,10 26,6 34,10 34,22 26,26 18,22" fill="white" opacity="0.9" />
+        <text x="100" y="22" font-family="'Google Sans', Arial, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">Cloud Run</text>
+        <!-- Content -->
+        <text x="100" y="58" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#1A73E8" text-anchor="middle">golden-ui</text>
+        <text x="100" y="76" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#5f6368" text-anchor="middle">React / Nginx</text>
+        <text x="100" y="94" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">golden-ui-498515528197</text>
+        <text x="100" y="108" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">.us-east1.run.app</text>
+      </g>
+
+      <!-- ===================== CLOUD RUN: meeting-golden ===================== -->
+      <g id="meeting-golden-node" transform="translate(600, 170)">
+        <rect x="0" y="0" width="200" height="120" rx="10" fill="#ffffff" stroke="#4285F4" stroke-width="2" filter="url(#card-shadow)" />
+        <!-- Header bar -->
+        <rect x="0" y="0" width="200" height="38" rx="10" fill="#4285F4" />
+        <rect x="0" y="28" width="200" height="10" fill="#4285F4" />
+        <!-- Cloud Run icon -->
+        <polygon points="18,10 26,6 34,10 34,22 26,26 18,22" fill="white" opacity="0.9" />
+        <text x="100" y="22" font-family="'Google Sans', Arial, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">Cloud Run</text>
+        <!-- Content -->
+        <text x="100" y="58" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#1A73E8" text-anchor="middle">meeting-golden</text>
+        <text x="100" y="76" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#5f6368" text-anchor="middle">Spring Boot</text>
+        <text x="100" y="94" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">meeting-golden-498515528197</text>
+        <text x="100" y="108" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">.us-east1.run.app</text>
+      </g>
+
+      <!-- ===================== CLOUD SQL ===================== -->
+      <g id="cloud-sql-node" transform="translate(580, 380)">
+        <rect x="0" y="0" width="240" height="130" rx="10" fill="#ffffff" stroke="#1A73E8" stroke-width="2" filter="url(#card-shadow)" />
+        <!-- Header bar -->
+        <rect x="0" y="0" width="240" height="38" rx="10" fill="#1A73E8" />
+        <rect x="0" y="28" width="240" height="10" fill="#1A73E8" />
+        <!-- DB cylinder icon -->
+        <ellipse cx="26" cy="14" rx="10" ry="5" fill="white" opacity="0.9" />
+        <rect x="16" y="14" width="20" height="12" fill="white" opacity="0.9" />
+        <ellipse cx="26" cy="26" rx="10" ry="5" fill="white" opacity="0.7" />
+        <text x="120" y="22" font-family="'Google Sans', Arial, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">Cloud SQL</text>
+        <!-- Content -->
+        <text x="120" y="58" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#1A73E8" text-anchor="middle">MySQL 8.4</text>
+        <text x="120" y="76" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#5f6368" text-anchor="middle">IAM Auth + Cloud SQL Connector</text>
+        <text x="120" y="95" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">golden-project-492118:us-east1:</text>
+        <text x="120" y="108" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">golden-project</text>
+        <text x="120" y="122" font-family="'Google Sans', Arial, sans-serif" font-size="9.5" font-weight="600" fill="#1A73E8" text-anchor="middle">DB: golden_db</text>
+      </g>
+
+      <!-- ===================== CLOUD STORAGE ===================== -->
+      <g id="cloud-storage-node" transform="translate(840, 380)">
+        <rect x="0" y="0" width="200" height="130" rx="10" fill="#ffffff" stroke="#34A853" stroke-width="2" filter="url(#card-shadow)" />
+        <!-- Header bar -->
+        <rect x="0" y="0" width="200" height="38" rx="10" fill="#34A853" />
+        <rect x="0" y="28" width="200" height="10" fill="#34A853" />
+        <!-- Storage bucket icon (simplified) -->
+        <rect x="14" y="8" width="22" height="18" rx="2" fill="white" opacity="0.9" />
+        <rect x="18" y="5" width="14" height="5" rx="2" fill="white" opacity="0.7" />
+        <text x="100" y="22" font-family="'Google Sans', Arial, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">Cloud Storage</text>
+        <!-- Content -->
+        <text x="100" y="58" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#137333" text-anchor="middle">images_golden</text>
+        <text x="100" y="76" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#5f6368" text-anchor="middle">Dog photo storage</text>
+        <text x="100" y="95" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">Stores dog photos</text>
+        <text x="100" y="110" font-family="'Google Sans', Arial, sans-serif" font-size="9" fill="#80868b" text-anchor="middle">Returns public URLs</text>
+      </g>
+
+      <!-- ===================== ARTIFACT REGISTRY ===================== -->
+      <g id="artifact-registry-node" transform="translate(580, 60)">
+        <rect x="0" y="0" width="240" height="90" rx="10" fill="#ffffff" stroke="#9C27B0" stroke-width="2" filter="url(#card-shadow)" />
+        <!-- Header bar -->
+        <rect x="0" y="0" width="240" height="38" rx="10" fill="#9C27B0" />
+        <rect x="0" y="28" width="240" height="10" fill="#9C27B0" />
+        <!-- Package icon -->
+        <rect x="13" y="8" width="18" height="18" rx="2" fill="white" opacity="0.9" />
+        <line x1="13" y1="17" x2="31" y2="17" stroke="#9C27B0" stroke-width="1.5" />
+        <line x1="22" y1="8" x2="22" y2="26" stroke="#9C27B0" stroke-width="1.5" />
+        <text x="120" y="22" font-family="'Google Sans', Arial, sans-serif" font-size="11" font-weight="600" fill="white" text-anchor="middle">Artifact Registry</text>
+        <!-- Content -->
+        <text x="120" y="58" font-family="'Google Sans', Arial, sans-serif" font-size="13" font-weight="700" fill="#6A0DAD" text-anchor="middle">golden-repo</text>
+        <text x="120" y="76" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#5f6368" text-anchor="middle">Docker image repository</text>
+      </g>
+
+      <!-- ===================== ARROWS ===================== -->
+
+      <!-- 1. User → golden-ui  (HTTPS) -->
+      <line
+        x1="182" y1="270"
+        x2="298" y2="230"
+        stroke="#4285F4" stroke-width="2"
+        marker-end="url(#arrow-blue)"
+      />
+      <!-- Label background -->
+      <rect x="192" y="240" width="76" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="230" y="253" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#4285F4" text-anchor="middle">HTTPS</text>
+
+      <!-- 2. golden-ui → meeting-golden  (HTTPS GraphQL) -->
+      <line
+        x1="500" y1="230"
+        x2="598" y2="230"
+        stroke="#4285F4" stroke-width="2"
+        marker-end="url(#arrow-blue)"
+      />
+      <rect x="510" y="216" width="78" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="549" y="229" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#4285F4" text-anchor="middle">GraphQL</text>
+
+      <!-- 3. meeting-golden → Cloud SQL  (Cloud SQL Connector) -->
+      <!-- Vertical arrow down from meeting-golden center to Cloud SQL -->
+      <line
+        x1="700" y1="290"
+        x2="700" y2="378"
+        stroke="#1A73E8" stroke-width="2"
+        marker-end="url(#arrow-dark-blue)"
+      />
+      <rect x="632" y="322" width="136" height="18" rx="4" fill="white" opacity="0.9" />
+      <text x="700" y="335" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#1A73E8" text-anchor="middle">Cloud SQL Connector</text>
+
+      <!-- 4. meeting-golden → Cloud Storage  (HTTPS) -->
+      <line
+        x1="800" y1="270"
+        x2="900" y2="378"
+        stroke="#34A853" stroke-width="2"
+        marker-end="url(#arrow-green)"
+      />
+      <rect x="826" y="304" width="90" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="871" y="317" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#34A853" text-anchor="middle">HTTPS (REST)</text>
+
+      <!-- 5a. Artifact Registry → golden-ui  (Docker pull) -->
+      <!-- Curved path: from bottom of Artifact Registry (700, 150) down-left to golden-ui (400, 170) -->
+      <path
+        d="M 680 150 C 600 160, 500 155, 400 168"
+        stroke="#9C27B0" stroke-width="1.8" fill="none"
+        stroke-dasharray="6,3"
+        marker-end="url(#arrow-purple)"
+      />
+      <rect x="516" y="143" width="90" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="561" y="156" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#9C27B0" text-anchor="middle">Docker pull</text>
+
+      <!-- 5b. Artifact Registry → meeting-golden  (Docker pull) -->
+      <path
+        d="M 720 150 C 730 155, 735 158, 740 168"
+        stroke="#9C27B0" stroke-width="1.8" fill="none"
+        stroke-dasharray="6,3"
+        marker-end="url(#arrow-purple)"
+      />
+      <rect x="720" y="143" width="90" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="765" y="156" font-family="'Google Sans', Arial, sans-serif" font-size="10" font-weight="600" fill="#9C27B0" text-anchor="middle">Docker pull</text>
+
+      <!-- ===================== RETURN ARROW: Cloud Storage → meeting-golden ===================== -->
+      <!-- Dashed return arrow indicating public URL response -->
+      <path
+        d="M 940 378 C 945 340, 920 310, 820 270"
+        stroke="#34A853" stroke-width="1.5" fill="none"
+        stroke-dasharray="5,3"
+        marker-end="url(#arrow-green)"
+      />
+      <rect x="896" y="319" width="82" height="18" rx="4" fill="white" opacity="0.85" />
+      <text x="937" y="332" font-family="'Google Sans', Arial, sans-serif" font-size="9.5" font-weight="600" fill="#34A853" text-anchor="middle">Public URL</text>
+
+      <!-- ===================== REGION LABEL (bottom right of boundary) ===================== -->
+      <text x="990" y="548" font-family="'Google Sans', Arial, sans-serif" font-size="10" fill="#80868b" text-anchor="end">
+        All services in us-east1
+      </text>
+
+    </svg>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-title">Service Legend</div>
+    <div class="legend-items">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#4285F4;"></div>
+        <span>Cloud Run (Frontend &amp; Backend containers)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#1A73E8;"></div>
+        <span>Cloud SQL — MySQL 8.4 (IAM auth via Cloud SQL Connector)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#34A853;"></div>
+        <span>Cloud Storage — Object bucket for dog photos</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#9C27B0;"></div>
+        <span>Artifact Registry — Docker image source (dashed = image pull)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#F1F3F4; border:1px solid #dadce0;"></div>
+        <span>User / Browser (external client)</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

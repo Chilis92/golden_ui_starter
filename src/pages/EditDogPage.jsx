@@ -22,21 +22,14 @@ export default function EditDogPage() {
     name: dog.name || '',
     age: dog.age ?? '',
     gender: dog.gender || 'Male',
-    imageURL: dog.imageURL || null,   // used only for the preview
-    owner: dog.owner
-      ? {
-          name: dog.owner.name || '',
-          age: dog.owner.age ?? '',
-          gender: dog.owner.gender || 'Male',
-          email: dog.owner.email || '',
-          city: dog.owner.city || 'Guadalajara',
-          phone: dog.owner.phone || ''
-        }
-      : null
+    instagram: dog.instagram || '',
+    city: dog.city || '',
+    imageURL: dog.imageURL || null,
+    owner: dog.owner ? { name: dog.owner.name || '', email: dog.owner.email || '' } : null
   }
 
-  function handleSubmit(data) {
-    updateDog(dog.dogId, data)
+  async function handleSubmit(data) {
+    await updateDog(dog.dogId, data)
     navigate('/dogs')
   }
 
