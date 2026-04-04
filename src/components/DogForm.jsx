@@ -135,6 +135,9 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
         <select id="city" name="city" value={values.city} onChange={handleChange}>
           <option value="Guadalajara">Guadalajara</option>
           <option value="Zapopan">Zapopan</option>
+          <option value="Tlaquepaque">Tlaquepaque</option>
+          <option value="Tonalá">Tonalá</option>
+          <option value="Tlajomulco">Tlajomulco</option>
         </select>
       </div>
 

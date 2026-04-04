@@ -7,7 +7,7 @@ export default function WelcomePage() {
     <main className={styles.page}>
       <div className={styles.hero}>
         <div className={styles.icon}>🐾</div>
-        <h1>Bienvenidos a la comunidad de Golden Retrievers de GDL y Zapopan</h1>
+        <h1>Bienvenidos a la comunidad de Golden Retrievers de Jalisco</h1>
 
         <div className={styles.buttons}>
           <button className={styles.primary} onClick={() => navigate('/register')}>Registrar nuevo Golden</button>
