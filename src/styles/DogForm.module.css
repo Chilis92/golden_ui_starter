@@ -22,11 +22,19 @@
 }
 
 .fileInput {
-  padding: 6px 0;
-  border: none;
-  background: none;
-  font-size: 0.9rem;
+  padding: 12px 16px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: #fafafa;
+  font-size: 1rem;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fileInput:hover {
+  border-color: var(--color-primary);
+  background: #fef5ec;
 }
 
 .previewWrapper {

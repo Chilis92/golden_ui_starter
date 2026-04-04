@@ -1,4 +1,4 @@
-const GRAPHQL_URL = 'http://localhost:8080/graphql'
+const GRAPHQL_URL = 'https://meeting-golden-498515528197.us-east1.run.app/graphql'
 
 // Shared fragment so every dog query returns the same shape
 const DOG_FIELDS = `
@@ -7,14 +7,12 @@ const DOG_FIELDS = `
   age
   gender
   imageURL
+  instagram
+  city
   owner {
     personId
     name
-    age
-    gender
     email
-    city
-    phone
   }
 `
 

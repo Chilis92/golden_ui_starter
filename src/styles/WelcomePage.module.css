@@ -22,43 +22,11 @@
   margin-bottom: 0.75rem;
 }
 
-.hero > p {
+.welcome {
+  font-size: 1.25rem;
   color: var(--color-text-muted);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-}
-
-.photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 580px) {
-  .photos { grid-template-columns: 1fr; }
-}
-
-.figure {
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-.photo {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-.caption {
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  background: #f8f8f8;
-  padding: 4px 8px;
-  text-align: left;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 
 .buttons {
