@@ -35,14 +35,20 @@ async function gqlRequest(query, variables = {}) {
 // Queries
 // ---------------------------------------------------------------------------
 
-export async function fetchAllDogs() {
+export async function fetchAllDogs(page = 0, size = 20) {
   const data = await gqlRequest(`
-    query FindAllDogs {
-      findAllDogs {
-        ${DOG_FIELDS}
+    query FindAllDogs($page: Int, $size: Int) {
+      findAllDogs(page: $page, size: $size) {
+        content {
+          ${DOG_FIELDS}
+        }
+        totalElements
+        totalPages
+        currentPage
+        hasNext
       }
     }
-  `)
+  `, { page, size })
   return data.findAllDogs
 }
 

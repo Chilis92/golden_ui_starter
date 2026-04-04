@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import {
   fetchAllDogs,
+  fetchDogById,
   createDog as apiCreateDog,
   updateDog as apiUpdateDog,
   deleteDog as apiDeleteDog
@@ -8,27 +9,24 @@ import {
 
 const DogContext = createContext(null)
 
+const PAGE_SIZE = 20
+
 export function DogProvider({ children }) {
   const [dogs, setDogs] = useState([])
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const [totalElements, setTotalElements] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Load all dogs from the backend on mount
-  useEffect(() => {
-    let cancelled = false
-    setLoading(true)
-    fetchAllDogs()
-      .then(data => { if (!cancelled) { setDogs(data); setError(null) } })
-      .catch(err => { if (!cancelled) setError(err.message) })
-      .finally(() => { if (!cancelled) setLoading(false) })
-    return () => { cancelled = true }
-  }, [])
-
-  const refresh = useCallback(async () => {
+  const loadPage = useCallback(async (page) => {
     setLoading(true)
     try {
-      const data = await fetchAllDogs()
-      setDogs(data)
+      const data = await fetchAllDogs(page, PAGE_SIZE)
+      setDogs(data.content)
+      setCurrentPage(data.currentPage)
+      setTotalPages(data.totalPages)
+      setTotalElements(data.totalElements)
       setError(null)
     } catch (err) {
       setError(err.message)
@@ -36,6 +34,13 @@ export function DogProvider({ children }) {
       setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    loadPage(0)
+  }, [loadPage])
+
+  const refresh = useCallback(() => loadPage(currentPage), [loadPage, currentPage])
+  const goToPage = useCallback((page) => loadPage(page), [loadPage])
 
   function getTokens() {
     return JSON.parse(localStorage.getItem('golden_tokens') || '{}')
@@ -61,7 +66,8 @@ export function DogProvider({ children }) {
     if (created) {
       created.forEach(dog => saveToken(dog.dogId, dog.token))
     }
-    await refresh()
+    // Go to page 0 after adding so the new dog is visible (sorted by id desc)
+    await loadPage(0)
   }
 
   async function updateDog(id, dogData) {
@@ -78,7 +84,12 @@ export function DogProvider({ children }) {
   }
 
   return (
-    <DogContext.Provider value={{ dogs, loading, error, addDog, updateDog, deleteDog, getToken }}>
+    <DogContext.Provider value={{
+      dogs, loading, error,
+      currentPage, totalPages, totalElements,
+      goToPage,
+      addDog, updateDog, deleteDog, getToken
+    }}>
       {children}
     </DogContext.Provider>
   )

@@ -1,23 +1,27 @@
-import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDogs } from '../context/DogContext'
+import { fetchDogById } from '../services/dogApi'
 import DogForm from '../components/DogForm'
 import styles from '../styles/EditDogPage.module.css'
 
 export default function EditDogPage() {
   const { id } = useParams()
-  const { dogs, updateDog, loading } = useDogs()
+  const { updateDog } = useDogs()
   const navigate = useNavigate()
+  const [dog, setDog] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  // Match against the backend integer ID (dogId), but the URL param is a string
-  const dog = dogs.find(d => String(d.dogId) === String(id))
+  useEffect(() => {
+    fetchDogById(id)
+      .then(setDog)
+      .catch(() => navigate('/dogs', { replace: true }))
+      .finally(() => setLoading(false))
+  }, [id])
 
-  // While the context is still fetching, don't redirect prematurely
   if (loading) return null
+  if (!dog) return null
 
-  if (!dog) return <Navigate to="/dogs" replace />
-
-  // Map the backend dog shape to the form's initialValues shape.
-  // photo starts as null — user must upload a new file to replace the image.
   const initialValues = {
     name: dog.name || '',
     age: dog.age ?? '',
