@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from '../styles/DogCard.module.css'
 
 export default function DogCard({ dog, onDelete }) {
   const navigate = useNavigate()
+  const [lightbox, setLightbox] = useState(false)
 
   function handleDelete() {
     if (window.confirm(`¿Eliminar a ${dog.name}?`)) onDelete(dog.dogId)
@@ -11,9 +13,14 @@ export default function DogCard({ dog, onDelete }) {
   return (
     <div className={styles.card}>
       {dog.imageURL
-        ? <img src={dog.imageURL} alt={dog.name} className={styles.photo} />
+        ? <img src={dog.imageURL} alt={dog.name} className={styles.photo} onClick={() => setLightbox(true)} />
         : <div className={styles.photoPlaceholder}>Sin foto</div>
       }
+      {lightbox && (
+        <div className={styles.overlay} onClick={() => setLightbox(false)}>
+          <img src={dog.imageURL} alt={dog.name} className={styles.lightboxImg} />
+        </div>
+      )}
       <h3 className={styles.name}>{dog.name}</h3>
 <p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
       <p><span className={styles.label}>Género:</span> {dog.gender === 'Female' ? 'Hembra' : 'Macho'}</p>
