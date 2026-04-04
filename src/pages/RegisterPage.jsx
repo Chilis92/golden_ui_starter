@@ -7,8 +7,8 @@ export default function RegisterPage() {
   const { addDog } = useDogs()
   const navigate = useNavigate()
 
-  function handleSubmit(data) {
-    addDog(data)
+  async function handleSubmit(data) {
+    await addDog(data)
     navigate('/dogs')
   }
 
