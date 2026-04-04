@@ -64,6 +64,12 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
   function handlePhoto(e) {
     const file = e.target.files[0]
     if (!file) return
+    if (file.size > 5 * 1024 * 1024) {
+      setErrors(prev => ({ ...prev, photo: 'La foto no puede ser mayor a 5MB' }))
+      e.target.value = ''
+      return
+    }
+    setErrors(prev => ({ ...prev, photo: undefined }))
     setPhotoFile(file)
     // Revoke any previous object URL to avoid memory leaks
     if (preview && preview.startsWith('blob:')) URL.revokeObjectURL(preview)
