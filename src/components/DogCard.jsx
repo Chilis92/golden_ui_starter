@@ -26,7 +26,17 @@ export default function DogCard({ dog, onDelete }) {
 <p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
       <p><span className={styles.label}>Género:</span> {dog.gender === 'Female' ? 'Hembra' : 'Macho'}</p>
       {dog.city && <p><span className={styles.label}>Ciudad:</span> {dog.city}</p>}
-      {dog.instagram && <p><span className={styles.label}>Instagram:</span> {dog.instagram}</p>}
+      {dog.instagram && (
+        <p>
+          <span className={styles.label}>Instagram:</span>{' '}
+          {dog.instagram.startsWith('https')
+            ? <a href={dog.instagram} target="_blank" rel="noreferrer">{dog.instagram}</a>
+            : dog.instagram.startsWith('@')
+              ? <a href={`https://instagram.com/${dog.instagram.slice(1)}`} target="_blank" rel="noreferrer">{dog.instagram}</a>
+              : dog.instagram
+          }
+        </p>
+      )}
       {dog.owner && (
         <p><span className={styles.label}>Dueño:</span> {dog.owner.name}</p>
       )}
