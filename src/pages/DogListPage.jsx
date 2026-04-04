@@ -26,7 +26,7 @@ export default function DogListPage() {
   return (
     <main className={styles.page}>
       <div className={styles.header}>
-        <h2>Perros registrados ({dogs.length})</h2>
+        <h2>Golden Registrados ({dogs.length})</h2>
         <button className={styles.addBtn} onClick={() => navigate('/register')}>+ Registrar nuevo Golden</button>
       </div>
 

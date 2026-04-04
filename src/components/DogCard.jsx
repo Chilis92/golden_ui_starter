@@ -16,12 +16,10 @@ export default function DogCard({ dog, onDelete }) {
       }
       <h3 className={styles.name}>{dog.name}</h3>
 <p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
-      <p><span className={styles.label}>Género:</span> {dog.gender}</p>
+      <p><span className={styles.label}>Género:</span> {dog.gender === 'Female' ? 'Hembra' : 'Macho'}</p>
+      {dog.city && <p><span className={styles.label}>Ciudad:</span> {dog.city}</p>}
       {dog.owner && (
-        <>
-          <p><span className={styles.label}>Dueño:</span> {dog.owner.name}</p>
-          <p><span className={styles.label}>Ciudad:</span> {dog.owner.city}</p>
-        </>
+        <p><span className={styles.label}>Dueño:</span> {dog.owner.name}</p>
       )}
       <div className={styles.actions}>
         <button className={styles.edit} onClick={() => navigate(`/dogs/${dog.dogId}/edit`)}>Editar</button>
