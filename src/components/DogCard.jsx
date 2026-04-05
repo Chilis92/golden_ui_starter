@@ -3,15 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useDogs } from '../context/DogContext'
 import styles from '../styles/DogCard.module.css'
 
-export default function DogCard({ dog, onDelete }) {
+export default function DogCard({ dog }) {
   const navigate = useNavigate()
   const { getToken } = useDogs()
   const [lightbox, setLightbox] = useState(false)
   const isOwner = !!getToken(dog.dogId)
-
-  function handleDelete() {
-    if (window.confirm(`¿Eliminar a ${dog.name}?`)) onDelete(dog.dogId)
-  }
 
   return (
     <div className={styles.card}>
@@ -46,7 +42,6 @@ export default function DogCard({ dog, onDelete }) {
       {isOwner && (
         <div className={styles.actions}>
           <button className={styles.edit} onClick={() => navigate(`/dogs/${dog.dogId}/edit`)}>Editar</button>
-          <button className={styles.delete} onClick={handleDelete}>Eliminar</button>
         </div>
       )}
     </div>
