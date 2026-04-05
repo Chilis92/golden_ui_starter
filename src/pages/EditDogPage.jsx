@@ -24,6 +24,7 @@ export default function EditDogPage() {
 
   const initialValues = {
     name: dog.name || '',
+    apodo: dog.apodo || '',
     age: dog.age ?? '',
     gender: dog.gender || 'Male',
     instagram: dog.instagram || '',

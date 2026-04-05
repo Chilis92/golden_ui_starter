@@ -4,6 +4,7 @@ const GRAPHQL_URL = 'https://meeting-golden-498515528197.us-east1.run.app/graphq
 const DOG_FIELDS = `
   dogId
   name
+  apodo
   age
   gender
   imageURL

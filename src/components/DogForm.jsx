@@ -3,6 +3,7 @@ import styles from '../styles/DogForm.module.css'
 
 const emptyDog = {
   name: '',
+  apodo: '',
   age: '',
   gender: 'Male',
   instagram: '',
@@ -98,6 +99,7 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
 
     onSubmit({
       name: values.name.trim(),
+      apodo: values.apodo.trim() || null,
       age: parseInt(values.age),
       gender: values.gender,
       instagram: values.instagram.trim() || null,
@@ -118,6 +120,12 @@ export default function DogForm({ initialValues = {}, onSubmit, submitLabel = 'S
         <label htmlFor="name">Nombre de mi golden</label>
         <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="ej. Buddy" />
         {errors.name && <span className={styles.error}>{errors.name}</span>}
+      </div>
+
+      {/* Apodo */}
+      <div className={styles.field}>
+        <label htmlFor="apodo">Apodo (opcional)</label>
+        <input id="apodo" name="apodo" value={values.apodo} onChange={handleChange} placeholder="ej. Willy" />
       </div>
 
       {/* Edad */}

@@ -22,6 +22,7 @@ export default function DogCard({ dog }) {
         </div>
       )}
       <h3 className={styles.name}>{dog.name}</h3>
+      {dog.apodo && <p><span className={styles.label}>Apodo:</span> {dog.apodo}</p>}
 <p><span className={styles.label}>Edad:</span> {dog.age} {dog.age === 1 ? 'año' : 'años'}</p>
       <p><span className={styles.label}>Género:</span> {dog.gender === 'Female' ? 'Hembra' : 'Macho'}</p>
       {dog.city && <p><span className={styles.label}>Ciudad:</span> {dog.city}</p>}
